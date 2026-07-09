@@ -1,5 +1,4 @@
 import streamlit as st
-import datetime
 
 # Configurazione della pagina
 st.set_page_config(page_title="Dove Lo Guardo AI", page_icon="📺", layout="centered")
@@ -12,16 +11,15 @@ st.markdown("""
     .platform-card { padding: 15px; border-radius: 10px; background-color: #f0f2f6; margin-bottom: 10px; border-left: 5px solid #007bff; }
     .tv-card { padding: 15px; border-radius: 10px; background-color: #fff3cd; margin-bottom: 10px; border-left: 5px solid #ffc107; }
     </style>
-""", unsafe_allowed_complete=True)
+""", unsafe_allow_html=True)
 
-st.markdown('<p class="main-title">📺 Dove Lo Guardo? AI</p>', unsafe_allowed_complete=True)
-st.markdown('<p class="subtitle">Scrivi il nome di un film o una serie (o descrivila). L\'AI ti dirà dove vederla in streaming o in TV!</p>', unsafe_allowed_complete=True)
+st.markdown('<p class="main-title">📺 Dove Lo Guardo? AI</p>', unsafe_allow_html=True)
+st.markdown('<p class="subtitle">Scrivi il nome di un film o una serie (o descrivila). L\'AI ti dirà dove vederla in streaming o in TV!</p>', unsafe_allow_html=True)
 
 # Input dell'utente
 user_query = st.text_input("Cosa vuoi guardare oggi?", placeholder="Es: Voglio vedere la serie DOC o un film di Nolan...")
 
 # Simulazione Database / Risposte dell'AI accoppiate alle API
-# Nella versione reale, qui chiameresti l'API di Gemini/OpenAI + JustWatch + Palinsesto TV
 MOCK_DATABASE = {
     "doc": {
         "titolo": "Doc - Nelle tue mani",
@@ -49,7 +47,6 @@ MOCK_DATABASE = {
 }
 
 if user_query:
-    # Mini-logica di ricerca (simula il matching dell'AI)
     query_clean = user_query.lower()
     found = False
     
@@ -69,7 +66,7 @@ if user_query:
                             <strong>{stream['piattaforma']}</strong><br>
                             <small>{stream['tipo']}</small>
                         </div>
-                        """, unsafe_allowed_complete=True)
+                        """, unsafe_allow_html=True)
                         
                 with col2:
                     st.subheader("📡 In onda in TV (Digitale/Sat)")
@@ -80,7 +77,7 @@ if user_query:
                             📅 {tv['orario']}<br>
                             <small>⚠️ {tv['nota']}</small>
                         </div>
-                        """, """""", unsafe_allowed_complete=True)
+                        """, unsafe_allow_html=True)
                 break
                 
         if not found:
